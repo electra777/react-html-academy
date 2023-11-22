@@ -23,11 +23,16 @@
 
     // TODO: создайте корневой компонент приложения
     const root = ReactDOM.createRoot(container);
-    root.render(<App images={images} />);
+    root.render(<App images={images} visibleItems={visibleItems} finishedItems={finishedItems} />);
 
-    function App({ images = [] }) {
+    function App({ images = [], visibleItems = [], finishedItems = [] }) {
       const cards = images.map((item) => (
-        <Card key={item.id} url={item.url} description={item.description} />
+        <Card
+          key={item.id}
+          url={item.url}
+          description={item.description}
+          isVisible={visibleItems.includes(item.id)}
+          isFinished={finishedItems.includes(item.id)} />
       ))
 
       return (
@@ -41,10 +46,12 @@
 
     // TODO: создайте компонент карточки
 
-    function Card({ id, url, description }) {
+    function Card({ id, url, description, isVisible = true, isFinished = false }) {
+
+      const cardClass = `card ${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`;
       return (
-        <li className="card card-show">
-          <img src={url} width="204" height="144" alt="Котик" />
+        <li className={cardClass}>
+          <img src={url} width="204" height="144" alt={description} />
         </li>
       )
     }
