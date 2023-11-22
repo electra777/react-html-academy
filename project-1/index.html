@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Игра Мемори</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!--подключите библиотеки React, ReactDOM и BabelJS-->
+  <script src="vendor/react.development.js"></script>
+  <script src="vendor/react-dom.development.js"></script>
+  <script src="vendor/babel.min.js"></script>
+  <!--подключите файл данных-->
+  <script src="data.js"></script>
+
+</head>
+
+<body>
+  <div id="root">
+    <!-- Корневой элемент -->
+  </div>
+  <script type="text/babel">
+    const container = document.getElementById('root');
+
+    // TODO: создайте корневой компонент приложения
+    const root = ReactDOM.createRoot(container);
+    root.render(<App images={images} />);
+
+    function App({ images = [] }) {
+      const cards = images.map((item) => (
+        <Card key={item.id} url={item.url} description={item.description} />
+      ))
+
+      return (
+        <section className="game container">
+          <ul className="cards cards-theme-cars">
+            {cards}
+          </ul>
+        </section>
+      )
+    }
+
+    // TODO: создайте компонент карточки
+
+    function Card({ id, url, description }) {
+      return (
+        <li className="card card-show">
+          <img src={url} width="204" height="144" alt="Котик" />
+        </li>
+      )
+    }
+
+    // TODO: передайте данные в компоненты
+  </script>
+</body>
+
+</html>
