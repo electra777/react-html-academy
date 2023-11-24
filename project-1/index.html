@@ -48,9 +48,9 @@
 
     function Card({ url, description, isVisible = true, isFinished = false }) {
 
-      const cardClass = ` ${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`;
+      const cardClass = `card ${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`;
       return (
-        <li className={`card ${className}`}>
+        <li className={cardClass}>
           <img src={url} width="204" height="144" alt={description} />
         </li>
       )
