@@ -46,11 +46,11 @@
 
     // TODO: создайте компонент карточки
 
-    function Card({ id, url, description, isVisible = true, isFinished = false }) {
+    function Card({ url, description, isVisible = true, isFinished = false }) {
 
-      const cardClass = `card ${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`;
+      const cardClass = ` ${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`;
       return (
-        <li className={cardClass}>
+        <li className={`card ${className}`}>
           <img src={url} width="204" height="144" alt={description} />
         </li>
       )
