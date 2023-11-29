@@ -33,8 +33,14 @@
       const [visibleItems, setVisibleItems] = React.useState([]);
 
       const handleCardClick = (id) => {
+        if (visibleItems.includes(id)) {
+          return;
+        }
         setVisibleItems((items) => [...items, id]);
+        console.log(visibleItems);
       }
+
+      console.log(visibleItems, 'visibleItems');
 
       return (
         <ul className="cards">
@@ -60,6 +66,9 @@
         }`;
 
       const handleClick = () => {
+        if (isFinished) {
+          return;
+        }
         onCardClick(id);
       }
 
