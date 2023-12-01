@@ -20,6 +20,9 @@
 
     function App({ images = [] }) {
       // TODO: добавьте состояние для счётчика шагов
+
+      const [count, setCount] = React.useState(0);
+
       return (
         <section className="game container">
           <div className="steps">Шаг {52}</div>
@@ -67,6 +70,7 @@
         if (isFinished) {
           return;
         }
+
         onCardClick(id);
       }
 
