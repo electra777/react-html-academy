@@ -23,15 +23,20 @@
 
       const [stepsCount, setStepsCount] = React.useState(0);
 
+      const checkItems = () => {
+        setStepsCount((item) => item + 1)
+      }
+
       return (
         <section className="game container">
-          <div className="steps">Шаг {52}</div>
-          <Grid images={images} />
+          <div className="steps">Шаг {stepsCount}</div>
+          <Grid images={images}
+            checkItems={checkItems} />
         </section>
       );
     }
 
-    function Grid({ images = [], finishedItems = [] }) {
+    function Grid({ images = [], finishedItems = [], checkItems }) {
 
       const [visibleItems, setVisibleItems] = React.useState([]);
 
@@ -40,8 +45,8 @@
           return;
         }
         setVisibleItems((items) => [...items, id]);
+        checkItems();
       }
-
 
       return (
         <ul className="cards">
