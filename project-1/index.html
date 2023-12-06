@@ -19,8 +19,8 @@
     root.render(<App images={images} />);
 
     function App({ images = [] }) {
-      // TODO: добавьте состояние для счётчика шагов
 
+      const finishedItems = ['YdAqiUkUoWA'];
       const [stepsCount, setStepsCount] = React.useState(0);
 
       const checkItems = () => {
@@ -31,12 +31,13 @@
         <section className="game container">
           <div className="steps">Шаг {stepsCount}</div>
           <Grid images={images}
-            checkItems={checkItems} />
+            checkItems={checkItems}
+            finishedItems={finishedItems} />
         </section>
       );
     }
 
-    function Grid({ images = [], finishedItems = [], checkItems }) {
+    function Grid({ images = [], finishedItems, checkItems }) {
 
       const [visibleItems, setVisibleItems] = React.useState([]);
 
