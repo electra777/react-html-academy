@@ -20,7 +20,8 @@
 
     function App({ images = [] }) {
 
-      const finishedItems = ['YdAqiUkUoWA'];
+      const finishedItems = [];
+
       const [stepsCount, setStepsCount] = React.useState(0);
 
       const checkItems = () => {
@@ -67,7 +68,7 @@
     }
 
     function Card({ id, url, description, isVisible, isFinished, onCardClick }) {
-      // TODO: добавьте обработку события
+
       const className = `${isVisible ? 'card-show' : ''
         } ${isFinished ? 'card-finished' : ''
         }`;
@@ -76,7 +77,6 @@
         if (isFinished) {
           return;
         }
-
         onCardClick(id);
       }
 
