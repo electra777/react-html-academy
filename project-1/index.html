@@ -19,19 +19,19 @@
     root.render(<App images={images} />);
 
     function App({ images = [] }) {
-
       const finishedItems = [];
 
       const [stepsCount, setStepsCount] = React.useState(0);
 
       const checkItems = () => {
-        setStepsCount((item) => item + 1)
+        setStepsCount((i) => i + 1)
       }
 
       return (
         <section className="game container">
           <div className="steps">Шаг {stepsCount}</div>
-          <Grid images={images}
+          <Grid
+            images={images}
             checkItems={checkItems}
             finishedItems={finishedItems} />
         </section>
@@ -39,11 +39,10 @@
     }
 
     function Grid({ images = [], finishedItems, checkItems }) {
-
       const [visibleItems, setVisibleItems] = React.useState([]);
 
       const handleCardClick = (id) => {
-        if (visibleItems.includes(id)) {
+        if (visibleItems.includes(id) || finishedItems.includes(id)) {
           return;
         }
         setVisibleItems((items) => [...items, id]);
@@ -68,15 +67,11 @@
     }
 
     function Card({ id, url, description, isVisible, isFinished, onCardClick }) {
-
       const className = `${isVisible ? 'card-show' : ''
         } ${isFinished ? 'card-finished' : ''
         }`;
 
       const handleClick = () => {
-        if (isFinished) {
-          return;
-        }
         onCardClick(id);
       }
 
