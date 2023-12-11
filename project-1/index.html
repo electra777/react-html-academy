@@ -34,6 +34,7 @@
             images={images}
             checkItems={checkItems}
             finishedItems={finishedItems} />
+
         </section>
       );
     }
@@ -84,6 +85,17 @@
           />
         </li>
       );
+    }
+
+    function Modal() {
+
+      return (
+        <div className="modal-box">
+          <h3 className="modal-caption">Победа!</h3>
+          <p className="modal-description">Вы собрали все пары за 7 шагов</p>
+          <button className="button modal-button" >Новая игра</button>
+        </div>
+      )
     }
   </script>
 </body>
