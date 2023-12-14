@@ -34,7 +34,7 @@
             images={images}
             checkItems={checkItems}
             finishedItems={finishedItems} />
-
+          <Modal />
         </section>
       );
     }
@@ -46,8 +46,21 @@
         if (visibleItems.includes(id) || finishedItems.includes(id)) {
           return;
         }
-        setVisibleItems((items) => [...items, id]);
-        checkItems();
+        switch (visibleItems.length) {
+          case 0:
+            setVisibleItems([id]);
+            break;
+          case 1:
+            setVisibleItems((items) => [...items, id]);
+            checkItems();
+            break;
+          case 2:
+            setVisibleItems([id]);
+            break;
+          default:
+            setVisibleItems([]);
+        }
+
       }
 
       return (
