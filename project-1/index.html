@@ -19,11 +19,16 @@
     root.render(<App images={images} />);
 
     function App({ images = [] }) {
-      const finishedItems = [];
 
       const [stepsCount, setStepsCount] = React.useState(0);
+      const [finishedItems, setFinishedItems] = React.useState([]);
 
-      const checkItems = () => {
+      const checkItems = (firstItem, secondItem) => {
+        const firstImage = images.find(({ id }) => id === firstItem);
+        const secondImage = images.find(({ id }) => id === secondItem);
+        if (firstImage.url === secondImage.url) {
+          setFinishedItems((items) => [...items, firstImage, secondImage])
+        }
         setStepsCount((i) => i + 1)
       }
 
@@ -52,7 +57,7 @@
             break;
           case 1:
             setVisibleItems((items) => [...items, id]);
-            checkItems();
+            checkItems(visibleItems[0], id);
             break;
           case 2:
             setVisibleItems([id]);
