@@ -27,9 +27,9 @@
         const firstImage = images.find(({ id }) => id === firstItem);
         const secondImage = images.find(({ id }) => id === secondItem);
         if (firstImage.url === secondImage.url) {
-          setFinishedItems((items) => [...items, firstImage, secondImage])
+          setFinishedItems((items) => [...items, firstImage, secondImage]);
         }
-        setStepsCount((i) => i + 1)
+        setStepsCount((i) => i + 1);
       }
 
       return (
@@ -44,7 +44,7 @@
       );
     }
 
-    function Grid({ images = [], finishedItems, checkItems }) {
+    function Grid({ images, finishedItems, checkItems }) {
       const [visibleItems, setVisibleItems] = React.useState([]);
 
       const handleCardClick = (id) => {
