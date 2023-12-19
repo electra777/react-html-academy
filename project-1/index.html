@@ -34,7 +34,7 @@
 
       return (
         <section className="game container">
-          <div className="steps">Шаг {stepsCount}</div>
+          <Progress stepsCount={stepsCount} />
           <Grid
             images={images}
             checkItems={checkItems}
@@ -115,6 +115,19 @@
         </div>
       )
     }
+
+    function Progress({ stepsCount }) {
+      return (
+        <>
+          <div className="progress-wrapper">
+            <div className="progress" style={{ width: '10 %' }}></div>
+          </div>
+          <p className="progress-description">Открыто <span>1</span> / <span>6</span></p>
+          <div className="steps">Шаг {stepsCount}</div>
+        </>
+      )
+    }
+
   </script>
 </body>
 
