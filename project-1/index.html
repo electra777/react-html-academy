@@ -32,6 +32,14 @@
         setStepsCount((i) => i + 1);
       }
 
+      const isGameOver = finishedItems.length === images.length;
+      console.log(isGameOver);
+
+      const handleReset = () => {
+        setFinishedItems([]);
+        setStepsCount(0);
+      }
+
       return (
         <section className="game container">
           <Progress
@@ -43,7 +51,13 @@
             images={images}
             checkItems={checkItems}
             finishedItems={finishedItems} />
-          <Modal />
+          {isGameOver && (
+            <Modal>
+              <h3 className="modal-caption">Победа!</h3>
+              <p className="modal-description">Вы собрали все пары за {stepsCount} шагов</p>
+              <button onClick={handleReset} className="button modal-button" >Новая игра</button>
+            </Modal>
+          )}
         </section>
       );
     }
@@ -52,7 +66,7 @@
       const [visibleItems, setVisibleItems] = React.useState([]);
 
       const handleCardClick = (id) => {
-        if (visibleItems.includes(id) || finishedItems.includes(id)) {
+        if (visibleItems.includes(id)) {
           return;
         }
         switch (visibleItems.length) {
@@ -91,10 +105,12 @@
 
     function Card({ id, url, description, isVisible, isFinished, onCardClick }) {
       const className = `${isVisible ? 'card-show' : ''
-        } ${isFinished ? 'card-finished' : ''
-        }`;
+        } ${isFinished ? 'card-finished' : ''}`;
 
       const handleClick = () => {
+        if (isFinished) {
+          return;
+        }
         onCardClick(id);
       }
 
@@ -109,13 +125,11 @@
       );
     }
 
-    function Modal() {
+    function Modal({ children }) {
 
       return (
         <div className="modal-box">
-          <h3 className="modal-caption">Победа!</h3>
-          <p className="modal-description">Вы собрали все пары за 7 шагов</p>
-          <button className="button modal-button" >Новая игра</button>
+          {children}
         </div>
       )
     }
