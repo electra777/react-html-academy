@@ -33,7 +33,6 @@
       }
 
       const isGameOver = finishedItems.length === images.length;
-      console.log(isGameOver);
 
       const handleReset = () => {
         setFinishedItems([]);
@@ -76,10 +75,14 @@
           case 1:
             setVisibleItems((items) => [...items, id]);
             checkItems(visibleItems[0], id);
+
+            setTimeout(() => {
+              setVisibleItems([]);
+            }, 1000);
             break;
-          case 2:
-            setVisibleItems([id]);
-            break;
+          // case 2:
+          //   setVisibleItems([id]);
+          //   break;
           default:
             setVisibleItems([]);
         }
@@ -103,7 +106,7 @@
       );
     }
 
-    function Card({ id, url, description, isVisible, isFinished, onCardClick }) {
+    function Card({ id, url, description, isVisible, isFinished, isChecking, onCardClick }) {
       const className = `${isVisible ? 'card-show' : ''
         } ${isFinished ? 'card-finished' : ''}`;
 
