@@ -9,6 +9,7 @@
   <script src="vendor/react-dom.development.js"></script>
   <script src="vendor/babel.min.js"></script>
   <script src="data.js"></script>
+  <script src="settings.js"></script>
 </head>
 
 <body>
@@ -18,39 +19,54 @@
     const root = ReactDOM.createRoot(container);
     root.render(<App images={images} />);
 
-    function App({ images = [] }) {
-
+    const useGame = (images) => {
       const [stepsCount, setStepsCount] = React.useState(0);
       const [finishedItems, setFinishedItems] = React.useState([]);
 
       const checkItems = (firstItem, secondItem) => {
         const firstImage = images.find(({ id }) => id === firstItem);
         const secondImage = images.find(({ id }) => id === secondItem);
+
         if (firstImage.url === secondImage.url) {
-          setFinishedItems((items) => [...items, firstImage, secondImage]);
+          setFinishedItems((items) => [...items, firstItem, secondItem]);
         }
         setStepsCount((i) => i + 1);
       }
-
-      const isGameOver = finishedItems.length === images.length;
 
       const handleReset = () => {
         setFinishedItems([]);
         setStepsCount(0);
       }
 
+      const isWin = finishedItems.length === images.length;
+
+      return {
+        finishedItems,
+        handleReset,
+        stepsCount,
+        checkItems,
+        isWin
+      }
+    }
+
+    function App({ images = [] }) {
+      const { finishedItems,
+        handleReset,
+        stepsCount,
+        checkItems,
+        isWin } = useGame(images);
+
       return (
         <section className="game container">
           <Progress
             stepsCount={stepsCount}
-            finishedItems={finishedItems}
-            value={finishedItems.length}
-            max={images.length} />
+            value={finishedItems.length / 2}
+            max={images.length / 2} />
           <Grid
             images={images}
             checkItems={checkItems}
             finishedItems={finishedItems} />
-          {isGameOver && (
+          {isWin && (
             <Modal>
               <h3 className="modal-caption">Победа!</h3>
               <p className="modal-description">Вы собрали все пары за {stepsCount} шагов</p>
@@ -61,11 +77,23 @@
       );
     }
 
-    function Grid({ images, finishedItems, checkItems }) {
+    function Progress({ stepsCount, value, max }) {
+      return (
+        <>
+          <div className="progress-wrapper">
+            <div className="progress" style={{ width: `${value / max * 100}%` }}></div>
+          </div>
+          <p className="progress-description">Открыто <span>{value}</span> / <span>{max}</span></p>
+          <div className="steps">Шаг {stepsCount}</div>
+        </>
+      )
+    }
+
+    function Grid({ images = [], finishedItems, checkItems }) {
       const [visibleItems, setVisibleItems] = React.useState([]);
 
       const handleCardClick = (id) => {
-        if (visibleItems.includes(id)) {
+        if (visibleItems.includes(id) || finishedItems.includes(id)) {
           return;
         }
         switch (visibleItems.length) {
@@ -78,19 +106,15 @@
 
             setTimeout(() => {
               setVisibleItems([]);
-            }, 1000);
+            }, TIMEOUT);
             break;
-          // case 2:
-          //   setVisibleItems([id]);
-          //   break;
           default:
             setVisibleItems([]);
         }
-
-      }
+      };
 
       return (
-        <ul className="cards">
+        <ul className="cards" >
           {images.map((item) => (
             <Card
               key={item.id}
@@ -107,13 +131,9 @@
     }
 
     function Card({ id, url, description, isVisible, isFinished, isChecking, onCardClick }) {
-      const className = `${isVisible ? 'card-show' : ''
-        } ${isFinished ? 'card-finished' : ''}`;
+      const className = `${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`;
 
       const handleClick = () => {
-        if (isFinished) {
-          return;
-        }
         onCardClick(id);
       }
 
@@ -139,17 +159,7 @@
       )
     }
 
-    function Progress({ stepsCount, value, max }) {
-      return (
-        <>
-          <div className="progress-wrapper">
-            <div className="progress" style={{ width: `${(max - value) / max * 100}%` }}></div>
-          </div>
-          <p className="progress-description">Открыто <span>{value / 2}</span> / <span>{max / 2}</span></p>
-          <div className="steps">Шаг {stepsCount}</div>
-        </>
-      )
-    }
+
 
   </script>
 </body>
