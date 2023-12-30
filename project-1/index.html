@@ -17,7 +17,7 @@
   <script type="text/babel">
     const container = document.getElementById('root');
     const root = ReactDOM.createRoot(container);
-    root.render(<App images={images} />);
+    root.render(<App images={images} results={results} />);
 
     const useGame = (images) => {
       const [stepsCount, setStepsCount] = React.useState(0);
@@ -49,7 +49,11 @@
       }
     }
 
-    function App({ images = [] }) {
+    function App({ images = [], results = [] }) {
+      return <GamePage images={images} />
+    }
+
+    function GamePage({ images = {} }) {
       const { finishedItems,
         handleReset,
         stepsCount,
@@ -74,12 +78,23 @@
             </Modal>
           )}
 
-          <ResultsPage />
+          <ResultsPage results={results} />
         </section>
       );
     }
 
-    function ResultsPage() {
+    function ResultsPage({ results }) {
+      const resultsRows = results.map(({ name, stepsCount }, index) => {
+        return (
+          <tr key={name} className="result-table-row active">
+            <td>{index + 1}</td>
+            <td>{name}</td>
+            <td>{stepsCount}</td>
+          </tr>
+        )
+      });
+
+
       return (
         <section className="result container">
           <h2>Лучшие результаты:</h2>
@@ -93,11 +108,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr className="result-table-row active">
-                <td>1</td>
-                <td>Маша</td>
-                <td>13</td>
-              </tr>
+              {resultsRows}
             </tbody>
           </table>
           <p>Хотите попробовать ещё раз?</p>
