@@ -50,7 +50,18 @@
     }
 
     function App({ images = [], results = [] }) {
-      return <GamePage images={images} />
+      const [page, setPage] = React.useState('results');
+      const getPage = (route) => {
+        switch (route) {
+          case 'game':
+            return <GamePage images={images} />;
+          case 'results':
+            return <ResultsPage results={results} />;
+          default:
+            return null;
+        }
+      };
+      return getPage(page);
     }
 
     function GamePage({ images = {} }) {
@@ -83,10 +94,13 @@
       );
     }
 
-    function ResultsPage({ results }) {
-      const resultsRows = results.map(({ name, stepsCount }, index) => {
+    function ResultsPage({ results, current = 0 }) {
+      const sortedResults = [...results, { name: 'Ваш результат', stepsCount: current }
+      ].sort((a, b) => b.stepsCount - a.stepsCount);
+
+      const resultsRows = sortedResults.map(({ name, stepsCount }, index) => {
         return (
-          <tr key={name} className="result-table-row active">
+          <tr key={name} className={`result-table-row ${stepsCount === current ? 'active' : ''}`}>
             <td>{index + 1}</td>
             <td>{name}</td>
             <td>{stepsCount}</td>
@@ -189,7 +203,6 @@
     }
 
     function Modal({ children }) {
-
       return (
         <div className="modal">
           <div className="modal-box">
