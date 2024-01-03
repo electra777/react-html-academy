@@ -33,16 +33,10 @@
         setStepsCount((i) => i + 1);
       }
 
-      const handleReset = () => {
-        setFinishedItems([]);
-        setStepsCount(0);
-      }
-
       const isWin = finishedItems.length === images.length;
 
       return {
         finishedItems,
-        handleReset,
         stepsCount,
         checkItems,
         isWin
@@ -50,13 +44,17 @@
     }
 
     function App({ images = [], results = [] }) {
-      const [page, setPage] = React.useState('results');
+      const [page, setPage] = React.useState('game');
+      const [result, setResult] = React.useState(0);
+      const showResults = () => {
+        setPage('results');
+      }
       const getPage = (route) => {
         switch (route) {
           case 'game':
-            return <GamePage images={images} />;
+            return <GamePage images={images} onShowResults={showResults} />;
           case 'results':
-            return <ResultsPage results={results} />;
+            return <ResultsPage results={results} current={result} />;
           default:
             return null;
         }
@@ -64,9 +62,8 @@
       return getPage(page);
     }
 
-    function GamePage({ images = {} }) {
+    function GamePage({ images = [], onShowResults }) {
       const { finishedItems,
-        handleReset,
         stepsCount,
         checkItems,
         isWin } = useGame(images);
@@ -85,11 +82,9 @@
             <Modal>
               <h3 className="modal-caption">Победа!</h3>
               <p className="modal-description">Вы собрали все пары за {stepsCount} шагов</p>
-              <button onClick={handleReset} className="button modal-button" >Новая игра</button>
+              <button onClick={onShowResults} className="button modal-button" >Результаты</button>
             </Modal>
           )}
-
-          <ResultsPage results={results} />
         </section>
       );
     }
