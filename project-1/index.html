@@ -91,7 +91,7 @@
 
     function ResultsPage({ results, current = 0 }) {
       const sortedResults = [...results, { name: 'Ваш результат', stepsCount: current }
-      ].sort((a, b) => b.stepsCount - a.stepsCount);
+      ].sort((a, b) => a.stepsCount - b.stepsCount);
 
       const resultsRows = sortedResults.map(({ name, stepsCount }, index) => {
         return (
