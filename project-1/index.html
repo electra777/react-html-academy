@@ -49,12 +49,15 @@
       const showResults = () => {
         setPage('results');
       }
+      const handleReset = () => {
+        setPage('game');
+      }
       const getPage = (route) => {
         switch (route) {
           case 'game':
             return <GamePage images={images} onShowResults={showResults} />;
           case 'results':
-            return <ResultsPage results={results} current={result} />;
+            return <ResultsPage results={results} current={result} onResetGame={handleReset} />;
           default:
             return null;
         }
@@ -89,7 +92,7 @@
       );
     }
 
-    function ResultsPage({ results, current = 0 }) {
+    function ResultsPage({ results, current = 0, onResetGame }) {
       const sortedResults = [...results, { name: 'Ваш результат', stepsCount: current }
       ].sort((a, b) => a.stepsCount - b.stepsCount);
 
@@ -121,7 +124,7 @@
             </tbody>
           </table>
           <p>Хотите попробовать ещё раз?</p>
-          <button className="button result-button" type="button">Новая игра</button>
+          <button onClick={onResetGame} className="button result-button" type="button">Новая игра</button>
         </section>
       )
     }
