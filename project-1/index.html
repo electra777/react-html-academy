@@ -46,7 +46,8 @@
     function App({ images = [], results = [] }) {
       const [page, setPage] = React.useState('game');
       const [result, setResult] = React.useState(0);
-      const showResults = () => {
+      const showResults = (imagesCount) => {
+        setResult(imagesCount)
         setPage('results');
       }
       const handleReset = () => {
@@ -71,6 +72,10 @@
         checkItems,
         isWin } = useGame(images);
 
+      const handleResultsClick = () => {
+        onShowResults(finishedItems.length / 2);
+      }
+
       return (
         <section className="game container">
           <Progress
@@ -85,14 +90,14 @@
             <Modal>
               <h3 className="modal-caption">Победа!</h3>
               <p className="modal-description">Вы собрали все пары за {stepsCount} шагов</p>
-              <button onClick={onShowResults} className="button modal-button" >Результаты</button>
+              <button onClick={handleResultsClick} className="button modal-button" >Результаты</button>
             </Modal>
           )}
         </section>
       );
     }
 
-    function ResultsPage({ results, current = 0, onResetGame }) {
+    function ResultsPage({ results, current, onResetGame }) {
       const sortedResults = [...results, { name: 'Ваш результат', stepsCount: current }
       ].sort((a, b) => a.stepsCount - b.stepsCount);
 
