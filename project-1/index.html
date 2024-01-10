@@ -33,7 +33,7 @@
         setStepsCount((i) => i + 1);
       }
 
-      const isWin = finishedItems.length === images.length;
+      const isWin = finishedItems.length === images.length && finishedItems.length > 0;
 
       return {
         finishedItems,
@@ -46,8 +46,8 @@
     function App({ images = [], results = [] }) {
       const [page, setPage] = React.useState('game');
       const [result, setResult] = React.useState(0);
-      const showResults = (imagesCount) => {
-        setResult(imagesCount)
+      const showResults = (stepsCount) => {
+        setResult(stepsCount)
         setPage('results');
       }
       const handleReset = () => {
