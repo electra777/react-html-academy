@@ -73,7 +73,7 @@
         isWin } = useGame(images);
 
       const handleResultsClick = () => {
-        onShowResults(finishedItems.length / 2);
+        onShowResults(stepsCount);
       }
 
       return (
@@ -90,7 +90,7 @@
             <Modal>
               <h3 className="modal-caption">Победа!</h3>
               <p className="modal-description">Вы собрали все пары за {stepsCount} шагов</p>
-              <button onClick={handleResultsClick} className="button modal-button" >Результаты</button>
+              <button onClick={handleResultsClick} className="button modal-button" >Показать результаты</button>
             </Modal>
           )}
         </section>
@@ -98,7 +98,6 @@
     }
 
     function ResultsPage({ results, current, onResetGame }) {
-
       return (
         <section className="result container">
           <h2>Лучшие результаты:</h2>
@@ -150,11 +149,11 @@
 
     function Grid({ images = [], finishedItems, checkItems }) {
       const [visibleItems, setVisibleItems] = React.useState([]);
-
       const handleCardClick = (id) => {
         if (visibleItems.includes(id) || finishedItems.includes(id)) {
           return;
         }
+
         switch (visibleItems.length) {
           case 0:
             setVisibleItems([id]);
@@ -191,7 +190,6 @@
 
     function Card({ id, url, description, isVisible, isFinished, isChecking, onCardClick }) {
       const className = `${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`;
-
       const handleClick = () => {
         onCardClick(id);
       }
@@ -216,8 +214,6 @@
         </div>
       )
     }
-
-
 
   </script>
 </body>
