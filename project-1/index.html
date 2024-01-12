@@ -44,20 +44,20 @@
     }
 
     function App({ images = [], results = [] }) {
-      const [page, setPage] = React.useState('game');
+      const [page, setPage] = React.useState(AppRoute.Game);
       const [result, setResult] = React.useState(0);
       const showResults = (stepsCount) => {
         setResult(stepsCount)
-        setPage('results');
+        setPage(AppRoute.Results);
       }
       const handleReset = () => {
-        setPage('game');
+        setPage(AppRoute.Game);
       }
       const getPage = (route) => {
         switch (route) {
-          case 'game':
+          case AppRoute.Game:
             return <GamePage images={images} onShowResults={showResults} />;
-          case 'results':
+          case AppRoute.Results:
             return <ResultsPage results={results} current={result} onResetGame={handleReset} />;
           default:
             return null;
