@@ -17,7 +17,7 @@
   <script type="text/babel">
     const container = document.getElementById('root');
     const root = ReactDOM.createRoot(container);
-    root.render(<App images={images} results={results} />);
+    root.render(<App results={results} />);
 
     const useGame = (images) => {
       const [stepsCount, setStepsCount] = React.useState(0);
@@ -43,18 +43,27 @@
       }
     }
 
-    function App({ images = [], results = [] }) {
-      const [page, setPage] = React.useState(AppRoute.Game);
+    function App({ results = [] }) {
+      const [page, setPage] = React.useState(AppRoute.Initial);
+      const [images, setImages] = React.useState([]);
       const [result, setResult] = React.useState(0);
       const showResults = (stepsCount) => {
         setResult(stepsCount)
         setPage(AppRoute.Results);
+      }
+      const handleStart = (type) => {
+        const images = getImages(type);
+        setImages(images);
+        setPage(AppRoute.Game);
+
       }
       const handleReset = () => {
         setPage(AppRoute.Game);
       }
       const getPage = (route) => {
         switch (route) {
+          case AppRoute.Initial:
+            return <InitialPage onStart={handleStart} />
           case AppRoute.Game:
             return <GamePage images={images} onShowResults={showResults} />;
           case AppRoute.Results:
@@ -66,7 +75,16 @@
       return getPage(page);
     }
 
-    function InitialPage() {
+    function InitialPage({ onStart }) {
+      const handleStart = (type) => {
+        onStart(type);
+      };
+      const buttons = GAME_TYPES.map(({ type, icon, label }) => (
+        <button className={`ico-button ico-button-${icon}`} key={icon}
+          onClick={() => handleStart(type)} type="button">
+          {label}
+        </button>
+      ));
 
       return (
         <section className="rules container">
@@ -80,9 +98,7 @@
               <li>Если они совпадают – игрок забирает их и получает ещё один ход.</li>
             </ul>
           </div>
-          <button className="ico-button ico-button-cats" type="button">Котики</button>
-          <button className="ico-button ico-button-flowers" type="button">Цветочки</button>
-          <button className="ico-button ico-button-cars" type="button">Машины</button>
+          {buttons}
         </section>
       )
     }

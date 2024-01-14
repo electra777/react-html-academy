@@ -112,5 +112,5 @@ const results = [
 const getImages = (type) => {
 	// TODO: напишите код для формирования тематического набора данных
 	// TODO: напишите код для перемешивания данных
-	return [];
+	return [...imageCollection[type]];
 };
