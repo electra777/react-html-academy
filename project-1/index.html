@@ -8,6 +8,7 @@
   <script src="vendor/react.development.js"></script>
   <script src="vendor/react-dom.development.js"></script>
   <script src="vendor/babel.min.js"></script>
+  <script src="vendor/get-declension.min.umd.js"></script>
   <script src="data.js"></script>
   <script src="settings.js"></script>
 </head>
@@ -65,7 +66,7 @@
           case AppRoute.Initial:
             return <InitialPage onStart={handleStart} />
           case AppRoute.Game:
-            return <GamePage images={images} onShowResults={showResults} />;
+            return <GamePage images={images} onShowResults={showResults} type={images} />;
           case AppRoute.Results:
             return <ResultsPage results={results} current={result} onResetGame={handleReset} />;
           default:
@@ -103,7 +104,7 @@
       )
     }
 
-    function GamePage({ images = [], onShowResults }) {
+    function GamePage({ images = [], onShowResults, type }) {
       const { finishedItems,
         stepsCount,
         checkItems,
@@ -112,6 +113,13 @@
       const handleResultsClick = () => {
         onShowResults(stepsCount);
       }
+
+      const wordsDeclension = getDeclension({
+        count: stepsCount,
+        one: 'шаг',
+        few: 'шага',
+        many: 'шагов',
+      });
 
       return (
         <section className="game container">
@@ -122,11 +130,12 @@
           <Grid
             images={images}
             checkItems={checkItems}
-            finishedItems={finishedItems} />
+            finishedItems={finishedItems}
+            type={type} />
           {isWin && (
             <Modal>
               <h3 className="modal-caption">Победа!</h3>
-              <p className="modal-description">Вы собрали все пары за {stepsCount} шагов</p>
+              <p className="modal-description">Вы собрали все пары за {wordsDeclension}</p>
               <button onClick={handleResultsClick} className="button modal-button" >Показать результаты</button>
             </Modal>
           )}
@@ -184,7 +193,7 @@
       )
     }
 
-    function Grid({ images = [], finishedItems, checkItems }) {
+    function Grid({ images = [], finishedItems, checkItems, type }) {
       const [visibleItems, setVisibleItems] = React.useState([]);
       const handleCardClick = (id) => {
         if (visibleItems.includes(id) || finishedItems.includes(id)) {
@@ -219,14 +228,15 @@
               isVisible={visibleItems.includes(item.id)}
               isFinished={finishedItems.includes(item.id)}
               onCardClick={handleCardClick}
+              type={type}
             />
           ))}
         </ul>
       );
     }
 
-    function Card({ id, url, description, isVisible, isFinished, isChecking, onCardClick }) {
-      const className = `${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`;
+    function Card({ id, url, description, isVisible, isFinished, isChecking, onCardClick, type }) {
+      const className = `${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''} cards-theme-${type}`;
       const handleClick = () => {
         onCardClick(id);
       }
