@@ -48,25 +48,37 @@
       const [page, setPage] = React.useState(AppRoute.Initial);
       const [images, setImages] = React.useState([]);
       const [result, setResult] = React.useState(0);
+      const [type, setType] = React.useState('');
+      let imagesClone = [];
+
       const showResults = (stepsCount) => {
         setResult(stepsCount)
         setPage(AppRoute.Results);
       }
+
+      const handleFilling = (images) => {
+        imagesClone = images.map((item) => {
+          return { id: `${item.id}-1`, url: item.url, description: item.description }
+        });
+      }
+
       const handleStart = (type) => {
         const images = getImages(type);
-        setImages(images);
+        handleFilling(images);
+        setImages([...images, ...imagesClone]);
         setPage(AppRoute.Game);
+        setType(type);
 
       }
       const handleReset = () => {
-        setPage(AppRoute.Game);
+        setPage(AppRoute.Initial);
       }
       const getPage = (route) => {
         switch (route) {
           case AppRoute.Initial:
             return <InitialPage onStart={handleStart} />
           case AppRoute.Game:
-            return <GamePage images={images} onShowResults={showResults} type={images} />;
+            return <GamePage images={images} onShowResults={showResults} type={type} />;
           case AppRoute.Results:
             return <ResultsPage results={results} current={result} onResetGame={handleReset} />;
           default:
