@@ -56,23 +56,17 @@
         setPage(AppRoute.Results);
       }
 
-      const handleFilling = (images) => {
-        imagesClone = images.map((item) => {
-          return { id: `${item.id}-1`, url: item.url, description: item.description }
-        });
-      }
-
       const handleStart = (type) => {
         const images = getImages(type);
-        handleFilling(images);
-        setImages([...images, ...imagesClone]);
+        setImages(images);
         setPage(AppRoute.Game);
         setType(type);
-
       }
+
       const handleReset = () => {
         setPage(AppRoute.Initial);
       }
+
       const getPage = (route) => {
         switch (route) {
           case AppRoute.Initial:
@@ -89,12 +83,10 @@
     }
 
     function InitialPage({ onStart }) {
-      const handleStart = (type) => {
-        onStart(type);
-      };
+
       const buttons = GAME_TYPES.map(({ type, icon, label }) => (
         <button className={`ico-button ico-button-${icon}`} key={icon}
-          onClick={() => handleStart(type)} type="button">
+          onClick={() => onStart(type)} type="button">
           {label}
         </button>
       ));
@@ -147,7 +139,7 @@
           {isWin && (
             <Modal>
               <h3 className="modal-caption">Победа!</h3>
-              <p className="modal-description">Вы собрали все пары за {wordsDeclension}</p>
+              <p className="modal-description">Теперь давайте узнаем результаты этой партии</p>
               <button onClick={handleResultsClick} className="button modal-button" >Показать результаты</button>
             </Modal>
           )}

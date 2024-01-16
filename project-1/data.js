@@ -110,7 +110,10 @@ const results = [
 ];
 
 const getImages = (type) => {
-	// TODO: напишите код для формирования тематического набора данных
-	// TODO: напишите код для перемешивания данных
-	return [...imageCollection[type]];
+	const images = [...imageCollection[type]];
+	images.forEach((item) => {
+		images.push({ id: `${item.id}-1`, url: item.url, description: item.description });
+	});
+
+	return RANDOMIZED ? [...images].sort(() => 0.5 - Math.random()) : [...image];
 };

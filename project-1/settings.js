@@ -12,3 +12,5 @@ const GAME_TYPES = [
 	{ type: 'flowers', icon: 'flowers', label: 'Цветочки' },
 	{ type: 'cars', icon: 'cars', label: 'Машины' },
 ];
+
+const RANDOMIZED = true;
