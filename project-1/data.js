@@ -112,8 +112,8 @@ const results = [
 const getImages = (type) => {
 	const images = [...imageCollection[type]];
 	images.forEach((item) => {
-		images.push({ id: `${item.id}-1`, url: item.url, description: item.description });
+		images.push({ ...item, id: `${item.id}-1` });
 	});
 
-	return RANDOMIZED ? [...images].sort(() => 0.5 - Math.random()) : [...image];
+	return RANDOMIZED ? images.sort(() => 0.5 - Math.random()) : images;
 };
