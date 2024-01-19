@@ -36,11 +36,19 @@
 
       const isWin = finishedItems.length === images.length && finishedItems.length > 0;
 
+      const wordsDeclension = getDeclension({
+        count: stepsCount,
+        one: 'шаг',
+        few: 'шага',
+        many: 'шагов',
+      });
+
       return {
         finishedItems,
         stepsCount,
         checkItems,
-        isWin
+        isWin,
+        wordsDeclension
       }
     }
 
@@ -116,13 +124,6 @@
         onShowResults(stepsCount);
       }
 
-      const wordsDeclension = getDeclension({
-        count: stepsCount,
-        one: 'шаг',
-        few: 'шага',
-        many: 'шагов',
-      });
-
       return (
         <section className="game container">
           <Progress
@@ -146,6 +147,9 @@
     }
 
     function ResultsPage({ results, current, onResetGame }) {
+
+      const { wordsDeclension } = useGame([]);
+
       return (
         <section className="result container">
           <h2>Лучшие результаты:</h2>
@@ -197,6 +201,7 @@
 
     function Grid({ images = [], finishedItems, checkItems, type }) {
       const [visibleItems, setVisibleItems] = React.useState([]);
+
       const handleCardClick = (id) => {
         if (visibleItems.includes(id) || finishedItems.includes(id)) {
           return;
@@ -209,7 +214,6 @@
           case 1:
             setVisibleItems((items) => [...items, id]);
             checkItems(visibleItems[0], id);
-
             setTimeout(() => {
               setVisibleItems([]);
             }, TIMEOUT);
