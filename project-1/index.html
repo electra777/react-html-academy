@@ -224,7 +224,7 @@
       };
 
       return (
-        <ul className="cards" >
+        <ul className={`cards cards-theme-${type}`} >
           {images.map((item) => (
             <Card
               key={item.id}
@@ -234,7 +234,6 @@
               isVisible={visibleItems.includes(item.id)}
               isFinished={finishedItems.includes(item.id)}
               onCardClick={handleCardClick}
-              type={type}
             />
           ))}
         </ul>
@@ -242,7 +241,7 @@
     }
 
     function Card({ id, url, description, isVisible, isFinished, isChecking, onCardClick, type }) {
-      const className = `${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''} cards-theme-${type}`;
+      const className = `${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`;
       const handleClick = () => {
         onCardClick(id);
       }
