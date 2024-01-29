@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/electra777/react-html-academy#readme",
   "devDependencies": {
-    "webpack": "^5.90.1"
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4"
   }
 }
