@@ -1,23 +1,34 @@
 {
-  "name": "react-html-academy",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/electra777/react-html-academy.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/electra777/react-html-academy/issues"
-  },
-  "homepage": "https://github.com/electra777/react-html-academy#readme",
-  "devDependencies": {
-    "webpack": "^5.90.1",
-    "webpack-cli": "^5.1.4"
-  }
+	"name": "react-html-academy",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "webpack --mode production",
+		"start": "webpack server --mode development"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/electra777/react-html-academy.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/electra777/react-html-academy/issues"
+	},
+	"homepage": "https://github.com/electra777/react-html-academy#readme",
+	"devDependencies": {
+		"@babel/preset-env": "7.23.9",
+		"@babel/preset-react": "7.23.3",
+		"babel-loader": "9.1.3",
+		"webpack": "^5.90.1",
+		"webpack-cli": "^5.1.4",
+		"webpack-dev-server": "4.15.1"
+	},
+	"dependencies": {
+		"@dubaua/get-declension": "^1.0.2",
+		"html-webpack-plugin": "^5.6.0",
+		"react": "18.2.0",
+		"react-dom": "18.2.0"
+	}
 }
