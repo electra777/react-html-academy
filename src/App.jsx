@@ -2,6 +2,7 @@ import React from 'react';
 
 import InitialPage from './components/InitialPage';
 import GamePage from './components/GamePage';
+import ResultsPage from './components/ResultsPage';
 
 const useGame = (images) => {
 	const [stepsCount, setStepsCount] = React.useState(0);
@@ -61,28 +62,6 @@ function App({ getImages, results }) {
 		}
 	};
 	return getPage(page);
-}
-
-function Progress({ stepsCount, value, max }) {
-	return (
-		<>
-			<div className="progress-wrapper">
-				<div className="progress" style={{ width: `${(value / max) * 100}%` }}></div>
-			</div>
-			<p className="progress-description">
-				Открыто <span>{value}</span> / <span>{max}</span>
-			</p>
-			<div className="steps">Шаг {stepsCount}</div>
-		</>
-	);
-}
-
-function Modal({ children }) {
-	return (
-		<div className="modal">
-			<div className="modal-box">{children}</div>
-		</div>
-	);
 }
 
 export default App;

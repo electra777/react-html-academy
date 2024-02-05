@@ -1,3 +1,7 @@
+import Progress from './Progress';
+import Grid from './Grid';
+import Modal from './Modal';
+
 function GamePage({ images = [], onShowResults, type }) {
 	const { finishedItems, stepsCount, checkItems, isWin } = useGame(images);
 
