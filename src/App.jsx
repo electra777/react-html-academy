@@ -1,38 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import InitialPage from './components/InitialPage.jsx';
+import GamePage from './components/GamePage.jsx';
+import ResultsPage from './components/ResultsPage.jsx';
+import { AppRoute } from './settings.js';
+import { getImages, results } from './data.js';
 
-import InitialPage from './components/InitialPage';
-import GamePage from './components/GamePage';
-import ResultsPage from './components/ResultsPage';
-
-const useGame = (images) => {
-	const [stepsCount, setStepsCount] = React.useState(0);
-	const [finishedItems, setFinishedItems] = React.useState([]);
-
-	const checkItems = (firstItem, secondItem) => {
-		const firstImage = images.find(({ id }) => id === firstItem);
-		const secondImage = images.find(({ id }) => id === secondItem);
-
-		if (firstImage.url === secondImage.url) {
-			setFinishedItems((items) => [...items, firstItem, secondItem]);
-		}
-		setStepsCount((i) => i + 1);
-	};
-
-	const isWin = finishedItems.length === images.length && finishedItems.length > 0;
-
-	return {
-		finishedItems,
-		stepsCount,
-		checkItems,
-		isWin,
-	};
-};
-
-function App({ getImages, results }) {
-	const [page, setPage] = React.useState(AppRoute.Initial);
-	const [images, setImages] = React.useState([]);
-	const [result, setResult] = React.useState(0);
-	const [type, setType] = React.useState('');
+function App() {
+	const [page, setPage] = useState(AppRoute.Initial);
+	const [images, setImages] = useState([]);
+	const [result, setResult] = useState(0);
+	const [type, setType] = useState('');
 
 	const showResults = (stepsCount) => {
 		setResult(stepsCount);

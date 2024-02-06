@@ -1,7 +1,9 @@
-import Card from './Card';
+import React, { useState } from 'react';
+import Card from './Card.jsx';
+import { TIMEOUT } from '../settings';
 
 function Grid({ images = [], finishedItems, checkItems, type }) {
-	const [visibleItems, setVisibleItems] = React.useState([]);
+	const [visibleItems, setVisibleItems] = useState([]);
 
 	const handleCardClick = (id) => {
 		if (visibleItems.includes(id) || finishedItems.includes(id)) {

@@ -1,3 +1,5 @@
+import React from 'react';
+
 function ResultsTable({ current, results }) {
 	const sortedResults = [...results, { name: 'Ваш результат', stepsCount: current }].sort(
 		(a, b) => a.stepsCount - b.stepsCount,

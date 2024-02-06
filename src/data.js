@@ -1,4 +1,6 @@
-const cats = [
+import { RANDOMIZED } from './settings';
+
+export const cats = [
 	{
 		id: 'YdAqiUkUoWA',
 		url: 'img/cats-1.jpg',
@@ -31,7 +33,7 @@ const cats = [
 	},
 ];
 
-const cars = [
+export const cars = [
 	{
 		id: 'YdAqiUkUoWA',
 		url: 'img/cars-1.jpg',
@@ -64,7 +66,7 @@ const cars = [
 	},
 ];
 
-const flowers = [
+export const flowers = [
 	{
 		id: 'YdAqiUkUoWA',
 		url: 'img/flowers-1.jpg',
@@ -97,19 +99,19 @@ const flowers = [
 	},
 ];
 
-const imageCollection = {
+export const imageCollection = {
 	flowers,
 	cats,
 	cars,
 };
 
-const results = [
+export const results = [
 	{ name: 'Аня', stepsCount: 16 },
 	{ name: 'Вася', stepsCount: 12 },
 	{ name: 'Петя', stepsCount: 19 },
 ];
 
-const getImages = (type) => {
+export const getImages = (type) => {
 	const images = [...imageCollection[type]];
 	images.forEach((item) => {
 		images.push({ ...item, id: `${item.id}-1` });

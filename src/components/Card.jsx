@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Card({ id, url, description, isVisible, isFinished, isChecking, onCardClick, type }) {
 	const className = `${isVisible ? 'card-show' : ''} ${isFinished ? 'card-finished' : ''}`;
 

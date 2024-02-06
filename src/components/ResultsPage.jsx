@@ -1,7 +1,7 @@
-import ResultsTable from './ResultsTable';
+import React from 'react';
+import ResultsTable from './ResultsTable.jsx';
 
 import getDeclensionMin from '@dubaua/get-declension';
-// import getDeclension from '@dubaua/get-declension';
 
 function ResultsPage({ results, current, onResetGame }) {
 	const wordsDeclension = getDeclensionMin({

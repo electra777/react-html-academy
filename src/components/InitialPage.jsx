@@ -1,3 +1,6 @@
+import React from 'react';
+import { GAME_TYPES } from '../settings';
+
 function InitialPage({ onStart }) {
 	const buttons = GAME_TYPES.map(({ type, icon, label }) => (
 		<button

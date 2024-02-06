@@ -1,6 +1,8 @@
-import Progress from './Progress';
-import Grid from './Grid';
-import Modal from './Modal';
+import React from 'react';
+import Progress from './Progress.jsx';
+import Grid from './Grid.jsx';
+import Modal from './Modal.jsx';
+import useGame from '../useGame';
 
 function GamePage({ images = [], onShowResults, type }) {
 	const { finishedItems, stepsCount, checkItems, isWin } = useGame(images);

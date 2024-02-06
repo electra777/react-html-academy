@@ -1,16 +1,16 @@
 // Файл для настроек приложения
-const TIMEOUT = 800;
+export const TIMEOUT = 800;
 
-const AppRoute = {
+export const AppRoute = {
 	Game: 'game',
 	Results: 'results',
 	Initial: 'initial',
 };
 
-const GAME_TYPES = [
+export const GAME_TYPES = [
 	{ type: 'cats', icon: 'cats', label: 'Котики' },
 	{ type: 'flowers', icon: 'flowers', label: 'Цветочки' },
 	{ type: 'cars', icon: 'cars', label: 'Машины' },
 ];
 
-const RANDOMIZED = true;
+export const RANDOMIZED = true;
