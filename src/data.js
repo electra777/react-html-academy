@@ -3,17 +3,17 @@ import { RANDOMIZED } from './settings';
 export const cats = [
 	{
 		id: 'YdAqiUkUoWA',
-		url: '../public/img/cats-1.jpg',
+		url: '/public/img/cats-1.jpg',
 		description: '',
 	},
 	{
 		id: 'hX_hf2lPpUU',
-		url: '../public/img/cats-2.jpg',
+		url: '/img/cats-2.jpg',
 		description: '',
 	},
 	{
 		id: 'w1JE5duY62M',
-		url: '../public/img/cats-3.jpg',
+		url: '../img/cats-3.jpg',
 		description: '',
 	},
 	{
