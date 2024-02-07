@@ -7,7 +7,7 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url('../fonts/Nunito-Regular.woff2') format('woff2');
+	src: url('../public/fonts/Nunito-Regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -15,7 +15,7 @@
 	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
-	src: url('../fonts/Nunito-Bold.woff2') format('woff2');
+	src: url('../public/fonts/Nunito-Bold.woff2') format('woff2');
 }
 
 @font-face {
@@ -23,7 +23,7 @@
 	font-style: normal;
 	font-weight: 900;
 	font-display: swap;
-	src: url('../fonts/Nunito-Black.woff2') format('woff2');
+	src: url('../public/fonts/Nunito-Black.woff2') format('woff2');
 }
 
 body {
@@ -32,7 +32,7 @@ body {
 	font-size: 20px;
 	line-height: 28px;
 	color: #333333;
-	background: url('../img/clouds.svg') no-repeat top 40px center,
+	background: url('../public/img/clouds.svg') no-repeat top 40px center,
 		linear-gradient(180deg, #c2e5fe 0%, #ffffff 50%) no-repeat;
 }
 
@@ -88,15 +88,15 @@ body {
 }
 
 .ico-button-cats {
-	background-image: url('../img/icon-cats.svg');
+	background-image: url('../public/img/icon-cats.svg');
 }
 
 .ico-button-cars {
-	background-image: url('../img/icon-cars.svg');
+	background-image: url('../public/img/icon-cars.svg');
 }
 
 .ico-button-flowers {
-	background-image: url('../img/icon-flowers.svg');
+	background-image: url('../public/img/icon-flowers.svg');
 }
 
 .rules {
@@ -162,19 +162,19 @@ body {
 }
 
 .rules-list li:nth-child(1)::before {
-	background-image: url('../img/icon-rules-1.svg');
+	background-image: url('../public/img/icon-rules-1.svg');
 	background-position: center;
 	background-repeat: no-repeat;
 }
 
 .rules-list li:nth-child(2)::before {
-	background-image: url('../img/icon-rules-2.svg');
+	background-image: url('../public/img/icon-rules-2.svg');
 	background-position: center;
 	background-repeat: no-repeat;
 }
 
 .rules-list li:nth-child(3)::before {
-	background-image: url('../img/icon-rules-3.svg');
+	background-image: url('../public/img/icon-rules-3.svg');
 	background-position: center;
 	background-repeat: no-repeat;
 }
@@ -235,17 +235,17 @@ body {
 
 	perspective: 1000px; /* Для анимации */
 
-	--theme-back: url('../img/back-cats.svg');
+	--theme-back: url('../public/img/back-cats.svg');
 }
 
 /* класс для смены рубашки карточек, добавляется списку .cards */
 
 .cards-theme-flowers {
-	--theme-back: url('../img/back-flowers.svg');
+	--theme-back: url('../public/img/back-flowers.svg');
 }
 
 .cards-theme-cars {
-	--theme-back: url('../img/back-cars.svg');
+	--theme-back: url('../public/img/back-cars.svg');
 }
 
 .card {
@@ -293,7 +293,7 @@ body {
 	height: 144px;
 	border-radius: 5px;
 	background-color: rgba(140, 174, 200, 0.6);
-	background-image: url('../img/check.svg');
+	background-image: url('../public/img/check.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	opacity: 0;
@@ -376,7 +376,7 @@ body {
 	left: -30px;
 	width: 376px;
 	height: 130px;
-	background-image: url('../img/ribbon-with-stars.svg');
+	background-image: url('../public/img/ribbon-with-stars.svg');
 	background-position: top center;
 	background-repeat: no-repeat;
 }
