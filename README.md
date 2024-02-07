@@ -2,6 +2,8 @@
 
 #### Ссылка на Vercel:
 
+https://react-html-academy-gz7itpxm1-electra777.vercel.app/
+
 #### Stack:
 
 - React
